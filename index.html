@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const MORSE_TABLE = {
+            '.-': 'a',
+            '-...': 'b',
+            '-.-.': 'c',
+            '-..': 'd',
+            '.': 'e',
+            '..-.': 'f',
+            '--.': 'g',
+            '....': 'h',
+            '..': 'i',
+            '.---': 'j',
+            '-.-': 'k',
+            '.-..': 'l',
+            '--': 'm',
+            '-.': 'n',
+            '---': 'o',
+            '.--.': 'p',
+            '--.-': 'q',
+            '.-.': 'r',
+            '...': 's',
+            '-': 't',
+            '..-': 'u',
+            '...-': 'v',
+            '.--': 'w',
+            '-..-': 'x',
+            '-.--': 'y',
+            '--..': 'z',
+            '.----': '1',
+            '..---': '2',
+            '...--': '3',
+            '....-': '4',
+            '.....': '5',
+            '-....': '6',
+            '--...': '7',
+            '---..': '8',
+            '----.': '9',
+            '-----': '0',
+        };
+
+
+        const expr =
+            "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010";
+
+        function decode(expr) {
+
+            const tr = {
+                '00': '',
+                '10': '.',
+                '11': '-',
+                '**': ' ',
+            };
+            let _str = '';
+            let str = '';
+            let letter = '';
+
+            for (let index = 0; index < expr.length; index += 10) {
+                letter = expr.slice(index, index + 10);
+
+                _str = '';
+                for (let j = 0; j < 10; j += 2) {
+                    _str = _str + tr[letter[j] + letter[j + 1]];
+                }
+
+                str += MORSE_TABLE[_str] || ' ';
+            }
+            return str;
+        }
+        console.log(decode(expr));
+    </script>
+</body>
+
+</html>
